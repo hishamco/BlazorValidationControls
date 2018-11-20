@@ -1,0 +1,23 @@
+@using Microsoft.AspNetCore.Blazor.Components
+
+@functions{
+    [Parameter]
+    private string ControlToValidate { get; set; }
+
+    [Parameter]
+    private string ControlToCompare { get; set; }
+
+    [Parameter]
+    private string ErrorMessage { get; set; }
+
+    [Parameter]
+    private object ValueToCompare { get; set; }
+
+    [Parameter]
+    private int Operator { get; set; }
+
+    protected override void OnAfterRender()
+    {
+        ValidationJSInterop.CompareTo(ControlToValidate, ControlToCompare, ValueToCompare, ErrorMessage);
+    }
+}

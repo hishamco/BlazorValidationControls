@@ -1,0 +1,17 @@
+@using Microsoft.AspNetCore.Blazor.Components
+
+@functions{
+    [Parameter]
+    private string ControlToValidate { get; set; }
+
+    [Parameter]
+    private string ErrorMessage { get; set; }
+
+    [Parameter]
+    private string ValidationExpression { get; set; }
+
+    protected override void OnAfterRender()
+    {
+        ValidationJSInterop.ValidateRegEx(ControlToValidate, ValidationExpression, ErrorMessage);
+    }
+}
