@@ -1,0 +1,32 @@
+﻿@page "/validation"
+
+<h1>Form Validation</h1>
+<form class="needs-validation" novalidate>
+    <div class="form-group">
+        <label for="txtEmail">Email address</label>
+        <input type="text" class="form-control" id="txtEmail" placeholder="Email">
+        <RequiredFieldValidator ControlToValidate="txtEmail" ErrorMessage="The email is required." />
+    </div>
+    <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+        <RequiredFieldValidator ControlToValidate="txtPassword" ErrorMessage="The password is required." />
+    </div>
+    <div class="form-group">
+        <label for="txtConfirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Confirm Password">
+        @*<RequiredFieldValidator ControlToValidate="txtConfirmPassword" ErrorMessage="The confirm password is required." />*@
+        <CompareValidator ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword" ErrorMessage="The confirm password doesn't match." />
+    </div>
+    <div class="form-group">
+        <label for="txtAge">Age</label>
+        <input type="number" class="form-control" id="txtAge" placeholder="Age">
+        <RangeValidator ControlToValidate="txtAge" MinimumValue="15" MaximumValue="40" ErrorMessage="Age (15 - 40)." />
+    </div>
+    <div class="form-group">
+        <label for="txtDomain">Domain Name</label>
+        <input type="text" class="form-control" id="txtDomain" placeholder="Domain Name">
+        <RegularExpressionValidator ControlToValidate="txtDomain" ValidationExpression="(.*?)[^w{3}.]([a-zA-Z0-9]([a-zA-Z0-9-]{0,65}[a-zA-Z0-9])?.)+[a-zA-Z]{2,6}" ErrorMessage="Invalid domain name." />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
