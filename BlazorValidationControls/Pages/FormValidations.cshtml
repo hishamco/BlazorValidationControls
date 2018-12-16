@@ -5,7 +5,8 @@
     <div class="form-group">
         <label for="txtEmail">Email address</label>
         <input type="text" class="form-control" id="txtEmail" placeholder="Email">
-        <RequiredFieldValidator ControlToValidate="txtEmail" ErrorMessage="The email is required." />
+        @*<RequiredFieldValidator ControlToValidate="txtEmail" ErrorMessage="The email is required." />*@
+        <CustomValidator ControlToValidate="txtEmail" ServerValidationFunction="CheckEmailAvailability" ErrorMessage="The email is already taken." />
     </div>
     <div class="form-group">
         <label for="txtPassword">Password</label>
@@ -30,3 +31,11 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@functions{
+    [JSInvokable]
+    public static bool CheckEmailAvailability(string email)
+    {
+        return email == "hishamco_2007@hotmail.com";
+    }
+}
