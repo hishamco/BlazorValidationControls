@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Blazor.Components
+
+@functions{
+    [Parameter]
+    private string ControlToValidate { get; set; }
+
+    [Parameter]
+    private string ClientValidationFunction { get; set; }
+
+    [Parameter]
+    private string ServerValidationFunction { get; set; }
+
+    [Parameter]
+    private string ErrorMessage { get; set; }
+
+    protected override void OnAfterRender()
+    {
+        ValidationJSInterop.Validate(ControlToValidate, ClientValidationFunction, ServerValidationFunction, ErrorMessage);
+    }
+}

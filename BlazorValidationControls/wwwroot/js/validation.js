@@ -64,6 +64,42 @@
         e.parentNode.insertBefore(div, e.nextSibling);
         validation.validateForms();
     },
+
+    validate: function (element, clientFunction, serverFunction, msg) {
+        var e = document.getElementById(element);
+        var div = document.createElement("div");
+        div.classList.add('invalid-feedback');
+        div.innerHTML = msg;
+        e.parentNode.insertBefore(div, e.nextSibling);
+        if (serverFunction == null) {
+            e.setAttribute("onchange", clientFunction)
+            $(e).on('change', function () {
+                var isValid = window[clientFunction](e.value);
+                if (isValid) {
+                    if (e.classList.contains('is-invalid')) {
+                        e.classList.remove('is-invalid');
+                    }
+                }
+                else {
+                    e.classList.add('is-invalid');
+                }
+            });
+        }
+        else {
+            $(e).on('change', function () {
+                var isValid = DotNet.invokeMethod('Blazory', serverFunction, e.value);
+                if (isValid) {
+                    if (e.classList.contains('is-invalid')) {
+                        e.classList.remove('is-invalid');
+                    }
+                }
+                else {
+                    e.classList.add('is-invalid');
+                }
+            });
+        }
+        validateForms();
+    },
     validateForms: function () {
         var forms = document.getElementsByClassName('needs-validation');
         var validation = Array.prototype.filter.call(forms, function (form) {

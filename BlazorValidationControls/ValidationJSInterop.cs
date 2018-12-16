@@ -24,5 +24,10 @@ namespace BlazorValidationControls
         {
             return JSRuntime.Current.InvokeAsync<object>("validation.validateRegEx", element, expression, msg);
         }
+
+        public static Task Validate(string element, string clientFunction, string serverFunction, string msg)
+        {
+            return JSRuntime.Current.InvokeAsync<object>("validation.validate", element, clientFunction, serverFunction, msg);
+        }
     }
 }
